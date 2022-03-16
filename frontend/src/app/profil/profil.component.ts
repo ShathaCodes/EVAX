@@ -1,4 +1,5 @@
 import { Component, OnInit,EventEmitter,Output,Input } from '@angular/core';
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-profil',
@@ -7,16 +8,25 @@ import { Component, OnInit,EventEmitter,Output,Input } from '@angular/core';
 })
 export class ProfilComponent implements OnInit {
   
+
+  vaccinated=false;
   @Output()valueVaccinetedChanged=new EventEmitter();
 
   @Input () person:any;
-  constructor() { }
+
+  constructor(private service:ServiceService) { }
 
   ngOnInit(): void {
+    this.service.numberusers().subscribe((data:any)=>{
+      this.idUserUpdated = data;
+    }) 
   }
+  idUserUpdated:any;
   onsubmit(){
-    console.log('khraaaa');
-    this.valueVaccinetedChanged.emit("incrementerr");  
+    this.vaccinated=true;
+    this.valueVaccinetedChanged.emit("incrementerr");
+    this.idUserUpdated++;
+    this.service.upadteuser(this.idUserUpdated); 
   }
 
 }
