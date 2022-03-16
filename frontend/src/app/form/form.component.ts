@@ -1,5 +1,6 @@
 import { Component,EventEmitter,Output, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
+import { ServiceService } from '../service.service';
 
 @Component({
   selector: 'app-form',
@@ -7,28 +8,31 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./form.component.css']
 })
 export class FormComponent implements OnInit {
+
+  
   
   @Output()valueSubscibedChanged=new EventEmitter();
+  @Output()newUser=new EventEmitter();
+
   profileForm = new FormGroup({
     firstName: new FormControl(''),
     lastName: new FormControl(''),
     email: new FormControl(''),
-    number: new FormControl(''),
-    city: new FormControl(''),
     birthday: new FormControl(''),
+    city: new FormControl(''),
     sex: new FormControl(''),
+    phone: new FormControl(''),
   });
-  onSubmit() {
-    console.warn(this.profileForm.value);
-    if(this.profileForm.value!=null){ 
-    this.valueSubscibedChanged.emit(this.profileForm.value);
-  }
-    
-  }
 
- 
+  constructor(private service:ServiceService) { }
+  id:any;
 
-  constructor() { }
+   onSubmit() {
+    console.log(this.profileForm.value);
+    this.id= this.service.adduser(this.profileForm.value);
+    this.valueSubscibedChanged.emit(this.profileForm.value); 
+    this.newUser.emit(this.id);
+  }
 
   ngOnInit(): void {
   }

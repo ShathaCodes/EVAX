@@ -15,6 +15,6 @@
         
       </div>
       
-<app-form  *ngIf=!show (valueSubscibedChanged)="showValue($event)" ></app-form>
+<app-form  *ngIf=!show (newUser)="showUser($event)" (valueSubscibedChanged)="showValue($event)" ></app-form>
 <app-profil *ngIf=show [person]=person (valueVaccinetedChanged)="incrementVaccinated($event)"></app-profil>
 </div>
