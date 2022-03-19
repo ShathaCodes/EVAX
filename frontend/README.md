@@ -1,27 +1,33 @@
-# EvaxExample
+# Frontend using Angular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.1.2.
+Angular is a very famous framework that conforms to the MVVM design pattern, which allows highly responsive frontend appications that efficiently update when data from the server changes or a user interacts with the application.
 
-## Development server
+Benefits of using MVVM :
+1. Unit testability 
+2. Maintainability 
+3. Modularity
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+MVVM pattern supports two-way data binding between View and View-Model. This allows automatic propagation of changes, inside the state of View-Model to the View.
+We decided to use this architecture pattern because it is more event-driven as it uses data binding and thus makes easy separation of core business logic from the View.
 
-## Code scaffolding
+### Tutorial 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```
+ng serve 
+```
 
-## Build
+***
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+You first begin by registering on the website by entring your data.
 
-## Running unit tests
+You will then recieve an appointement date so you can go get your vaccination.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+You can see the number of registered users and vaccinated users updated in real-time.
 
-## Running end-to-end tests
+After taking your vaccination, you can go back to the website and check that you recieved your vaccination. You can see the number of vaccinated users get incremented, this is assured by the `ngmodel` two-way data-binding.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+
