@@ -10,13 +10,13 @@ Benefits of using MVVM :
 MVVM pattern supports two-way data binding between View and View-Model. This allows automatic propagation of changes, inside the state of View-Model to the View.
 We decided to use this architecture pattern because it is more event-driven as it uses data binding and thus makes easy separation of core business logic from the View.
 
+***
+
 ### Tutorial 
 
 ```
 ng serve 
 ```
-
-***
 
 You first begin by registering on the website by entring your data.
 
