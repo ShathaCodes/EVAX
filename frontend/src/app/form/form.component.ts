@@ -54,16 +54,6 @@ export class FormComponent implements OnInit {
   
   @Output()valueSubscibedChanged=new EventEmitter();
   @Output()newUser=new EventEmitter();
-
-  /*profileForm = new FormGroup({
-    firstName: new FormControl(''),
-    lastName: new FormControl(''),
-    email: new FormControl(''),
-    birthday: new FormControl(''),
-    city: new FormControl(''),
-    sex: new FormControl(''),
-    phone: new FormControl(''),
-  });*/
   constructor(private service:ServiceService) { 
   
   }
