@@ -41,6 +41,12 @@ docker-compose up
 or
 
 ```
-
+kubectl create secret generic postgres-user-pass --from-literal=password=<yourpassword>
+kubectl create secret generic postgres-db-url --from-literal=database=<dbname> --from-literal=url='jdbc:mysql://book-shop-postgres:5432/<dbname>?useSSL=false'
+kubectl apply -f deployments\postgres-deployment.yaml
+kubectl apply -f deployments\backend.yaml
+kubectl apply -f deployments\frontend.yaml
 ```
 
+## Note : Observability
+Besides logging, I have added Event tracing with Spring Cloud Sleuth which uses OpenTelemetry auto instrumentation to create traces and send it via Zipkin Exporter to Tempo (I added a local configuration for tempo for testing purposes). I also exposed application metrics for Prometheus via Spring Boot Actuator.
