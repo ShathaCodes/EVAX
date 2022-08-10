@@ -1,0 +1,38 @@
+apiVersion: apps/v1             # API version
+kind: Deployment                # Type of kubernetes resource
+metadata:
+  name: evax-frontend      # Name of the kubernetes resource
+spec:
+  replicas: 1                   # No of replicas/pods to run
+  selector:                     
+    matchLabels:                # This deployment applies to Pods matching the specified labels
+      app: evax-frontend
+  template:                     # Template for creating the Pods in this deployment
+    metadata:
+      labels:                   # Labels that will be applied to all the Pods in this deployment
+        app: evax-frontend
+    spec:                       # Spec for the containers that will run inside the Pods
+      containers:
+      - name: evax-frontend
+        image: evax-frontend:0.0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+          - name: http
+            containerPort: 80   # Should match the Port that the container listens on
+        resources:
+          limits:
+            cpu: 0.2
+            memory: "200Mi"
+---
+apiVersion: v1                  # API version
+kind: Service                   # Type of kubernetes resource
+metadata:
+  name: evax-frontend      # Name of the kubernetes resource
+spec:
+  type: LoadBalancer                 # Exposes the service by opening a port on each node
+  selector:
+    app: evax-frontend     # Any Pod matching the label `app=evax-frontend` will be picked up by this service
+  ports:                        # Forward incoming connections on port 80 to the target port 80 in the Pod
+  - protocol: TCP
+    port: 3333
+    targetPort: 80

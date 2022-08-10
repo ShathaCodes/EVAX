@@ -3,10 +3,12 @@ package com.Backend.models;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+@Table(name = "EvaxUser")
 @Entity
 public class User {
 
@@ -20,7 +22,7 @@ public class User {
 
 	private String email;
 
-	private java.sql.Date birthday;
+	private Date birthday;
 
 	private String city;
 	
@@ -64,11 +66,11 @@ public class User {
 		this.email = email;
 	}
 
-	public java.sql.Date getBirthday() {
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(java.sql.Date birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 

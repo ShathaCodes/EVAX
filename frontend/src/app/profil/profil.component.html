@@ -1,7 +1,7 @@
 <div class="card">
     <h1>{{person.firstName}} {{person.latsName}}</h1>
-    <p *ngIf= !vaccinated class="title">Date of appointment:{{person.birthday}}</p>
+    <p *ngIf= !vaccinated class="title">Date of appointment:{{person.vaccinationDate}}</p>
     <p>city: {{person.city}} </p>
-    <p>phone number :{{person.number}}</p>
+    <p>phone number :{{person.phone}}</p>
     <p *ngIf= !vaccinated ><button (click)="onsubmit()">I'm vaccinated</button></p>
   </div>

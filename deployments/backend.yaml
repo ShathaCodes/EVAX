@@ -1,0 +1,61 @@
+apiVersion: apps/v1           # API version
+kind: Deployment              # Type of kubernetes resource
+metadata:
+  name: evax-backend    # Name of the kubernetes resource
+  labels:                     # Labels that will be applied to this resource
+    app: evax-backend
+spec:
+  replicas: 1                 # No. of replicas/pods to run in this deployment
+  selector:
+    matchLabels:              # The deployment applies to any pods mayching the specified labels
+      app: evax-backend
+  template:                   # Template for creating the pods in this deployment
+    metadata:
+      labels:                 # Labels that will be applied to each Pod in this deployment
+        app: evax-backend
+    spec:                     # Spec for the containers that will be run in the Pods
+      containers:
+      - name: evax-backend
+        image: evax-backend:0.0.1
+        imagePullPolicy: IfNotPresent
+        ports:
+          - name: evax-http
+            containerPort: 8888 # The port that the container exposes
+        resources:
+          limits:
+            cpu: 0.2
+            memory: "300Mi"
+        env:                  
+        - name: SPRING_DATASOURCE_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: postgres-user
+              key: user
+        - name: SPRING_DATASOURCE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-user-pass
+              key: password
+        - name: SPRING_DATASOURCE_URL
+          value: "jdbc:postgresql://book-shop-postgres:5432/bookshop"
+        - name: SPRING_SLEUTH_OTEL_EXPORTER_ZIPKIN_ENDPOINT
+          value: "http://tempo.monitoring:9411"
+        - name: SPRING_ZIPKIN_BASE_URL
+          value: "http://tempo.monitoring:9411"
+            
+---
+apiVersion: v1                # API version
+kind: Service                 # Type of the kubernetes resource
+metadata:                     
+  name: evax-backend    # Name of the kubernetes resource
+  labels:                     # Labels that will be applied to this resource
+    app: evax-backend
+spec:                         
+  type: NodePort 		# The service will be exposed by opening a Port on each node and proxying it. 
+  selector:
+    app: evax-backend   
+  ports:                      # Forward incoming connections on port 8080 to the target port 8080
+  - port: 8888
+    nodePort: 30005
+    protocol: TCP
+    targetPort: 8888

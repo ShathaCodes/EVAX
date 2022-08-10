@@ -10,7 +10,7 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class ServiceService {
 
-  private REST_API_SERVER = "http://localhost:8080/users";
+  private REST_API_SERVER ="http://localhost:30005/users";
   errorMessage: any;
 
   constructor(private httpClient: HttpClient) { };
@@ -24,6 +24,7 @@ export class ServiceService {
       // Server-side errors
       errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     }
+    console.log(error)
     window.alert(errorMessage);
     return throwError(errorMessage);
   }
@@ -39,7 +40,7 @@ export class ServiceService {
   
   
    public adduser(user: any):Observable<any>{
-    this.httpClient.post<any>('http://localhost:8080/users/create', user).subscribe({
+    this.httpClient.post<any>('http://localhost:30005/users/create', user).subscribe({
         next: data => {
             this.userId = data.id;
         },
